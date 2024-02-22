@@ -1,7 +1,9 @@
+import useRouteElement from "./router/useRouteElement"
+
 function App() {
-  return (
-    <h1>XIn chao</h1>
-  )
+  const routesElements = useRouteElement()
+
+  return <>{routesElements}</>
 }
 
 export default App
