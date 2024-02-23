@@ -6,22 +6,17 @@ import {
   signInWithPopup,
 } from "firebase/auth"
 import { auth } from "../../firebase/config"
-import { useNavigate } from "react-router-dom"
 
 const facebookProvider = new FacebookAuthProvider()
 
 const Login = () => {
-  const navigate = useNavigate()
-
   const handleLoginFacebook = async () => {
-    const { user } = await signInWithPopup(auth, facebookProvider)
-    console.log({ user })
-    
-    auth.onAuthStateChanged((user)=> {
-      if(user) {
-        navigate('/')
-      }
-    })
+    const data = await signInWithPopup(auth, facebookProvider)
+    try {
+      console.log(data)
+    } catch(e) {
+      console.log(e)
+    }
   }
 
   return (

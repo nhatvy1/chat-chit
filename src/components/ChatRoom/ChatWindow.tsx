@@ -1,11 +1,12 @@
-import { UserAddOutlined } from "@ant-design/icons";
-import { Avatar, Button, Form, Input, Tooltip } from "antd";
-import styled from "styled-components";
+import { UserAddOutlined } from "@ant-design/icons"
+import { Avatar, Button, Form, Input, Tooltip } from "antd"
+import Message from "./Message"
+import styled from "styled-components"
 
 const HeaderStyled = styled.div`
   display: flex;
   justify-content: space-between;
-  height: 55px;
+  height: 56px;
   padding: 0 16px;
   align-items: center;
   border-bottom: 1px solid rgb(230, 230, 230);
@@ -26,33 +27,32 @@ const HeaderStyled = styled.div`
       font-size: 12px;
     }
   }
-`;
+`
 
 const ButtonGroupStyled = styled.div`
   display: flex;
   align-items: center;
-`;
+`
 
 const WrapperStyled = styled.div`
   height: 100vh;
-`;
+`
 
 const ContentStyled = styled.div`
-  height: calc(100% - 56px);
+  height: calc(100% - 57px);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 16px;
-`;
+`
 
 const FormStyled = styled(Form)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2px 2px 2px 0;
   border: 1px solid rgb(230, 230, 230);
-  border-radius: 2px;
+  border-radius: 5px;
 
+  padding: 2px 2px 2px 0;
   .ant-form {
     padding: 0;
   }
@@ -61,12 +61,13 @@ const FormStyled = styled(Form)`
     flex: 1;
     margin-bottom: 0;
   }
-`;
+`
 
 const MessageListStyled = styled.div`
   max-height: 100%;
   overflow-y: auto;
-`;
+  padding: 11px;
+`
 
 const ChatWindow = () => {
   return (
@@ -77,10 +78,14 @@ const ChatWindow = () => {
           <span className='header_description'>Day la room 1</span>
         </div>
         <ButtonGroupStyled>
-          <Button icon={<UserAddOutlined />} type='text'>
+          <Button
+            icon={<UserAddOutlined />}
+            type='text'>
             Mời
           </Button>
-          <Avatar.Group size='small' maxCount={2}>
+          <Avatar.Group
+            size='small'
+            maxCount={2}>
             <Tooltip title='A'>
               <Avatar>A</Avatar>
             </Tooltip>
@@ -95,19 +100,30 @@ const ChatWindow = () => {
       </HeaderStyled>
 
       <ContentStyled>
-        <FormStyled>
-          <Form.Item>
-            <Input
-              variant='borderless'
-              autoComplete='off'
-              placeholder='Nhập tin nhắn'
-            />
-          </Form.Item>
-          <Button type='primary'>Gửi</Button>
-        </FormStyled>
+        <MessageListStyled>
+          <Message
+            text='Xin chao'
+            photoURL='dsdsa'
+            createdAt={new Date()}
+            displayName='Vy'
+          />
+        </MessageListStyled>
+
+        <div style={{ padding: '11px' }}>
+          <FormStyled>
+            <Form.Item>
+              <Input
+                variant='borderless'
+                autoComplete='off'
+                placeholder='Nhập tin nhắn'
+              />
+            </Form.Item>
+            <Button type='primary'>Gửi</Button>
+          </FormStyled>
+        </div>
       </ContentStyled>
     </WrapperStyled>
-  );
-};
+  )
+}
 
-export default ChatWindow;
+export default ChatWindow

@@ -9,7 +9,12 @@ interface Props {
 
 const initialValue = {
   isLoading: false,
-  user: null,
+  user: {
+    displayName: '',
+    email: '',
+    uid: '',
+    photoURL: ''
+  },
 }
 
 export const AuthContext = createContext(initialValue)
