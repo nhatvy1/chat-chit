@@ -1,6 +1,8 @@
 import { Avatar, Button, Typography } from "antd";
 import styled from "styled-components";
-import { auth } from "../../firebase/config";
+import { auth, db } from "../../firebase/config";
+import { useEffect } from "react";
+import { collection, doc, onSnapshot } from "firebase/firestore";
 
 const WrapperStyled = styled.div`
   display: flex;
@@ -14,6 +16,15 @@ const WrapperStyled = styled.div`
   }
 `;
 const UserInfo = () => {
+  useEffect(()=> {
+    onSnapshot(collection(db, "users"), (snapshot: any) => {
+      const data = snapshot.docs.map((doc: any)=> ({
+        ...doc.data(),
+        id: doc.id
+      }))
+    });
+  }, [])
+
   return (
     <WrapperStyled>
       <div>

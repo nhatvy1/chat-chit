@@ -3,19 +3,26 @@ const { Title } = Typography
 import {
   FacebookAuthProvider,
   GoogleAuthProvider,
+  UserCredential,
   signInWithPopup,
 } from "firebase/auth"
-import { auth } from "../../firebase/config"
+import { auth, db } from "../../firebase/config"
+import { addDoc, collection } from "firebase/firestore"
+import { addDocument } from "../../firebase/service"
 
 const facebookProvider = new FacebookAuthProvider()
 
 const Login = () => {
   const handleLoginFacebook = async () => {
-    const data = await signInWithPopup(auth, facebookProvider)
-    try {
-      console.log(data)
-    } catch(e) {
-      console.log(e)
+    const { _tokenResponse, user }: any = await signInWithPopup(auth, facebookProvider)
+    if(_tokenResponse?.isNewUser) {
+      addDocument('users', {
+        displayName: user.displayName,
+        email: user.email,
+        uid: user.uid,
+        photoURL: user.photoURL,  
+        providerId: _tokenResponse.providerId
+      })
     }
   }
 
