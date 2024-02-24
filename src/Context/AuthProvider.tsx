@@ -45,8 +45,10 @@ const AuthProvider = ({ children }: Props) => {
     }
   }, [navigate])
 
+  const ctx = { user, isLoading }
+
   return (
-    <AuthContext.Provider value={user}>
+    <AuthContext.Provider value={ctx}>
       {isLoading ? <Spin /> : children}
     </AuthContext.Provider>
   )

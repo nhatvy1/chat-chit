@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { connectAuthEmulator, getAuth } from "firebase/auth";
+import { connectFirestoreEmulator, getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCLdoJ9ZZvomRBh6MgXp0sA_xFmGfPPGOo",
@@ -19,5 +19,11 @@ const analytics = getAnalytics(app)
 
 const auth = getAuth(app)
 const db = getFirestore(app)
+
+connectAuthEmulator(auth, 'http://127.0.0.1:9099')
+if (location.hostname === "localhost") {
+  // Point to the RTDB emulator running on localhost.
+  connectFirestoreEmulator(db, "127.0.0.1", 8080);
+} 
 
 export { db, auth }
